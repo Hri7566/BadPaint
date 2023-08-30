@@ -73,16 +73,6 @@ namespace BadPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dirt01 {
-            get {
-                object obj = ResourceManager.GetObject("dirt01", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Fill {
             get {
                 object obj = ResourceManager.GetObject("Fill", resourceCulture);
@@ -96,6 +86,16 @@ namespace BadPaint.Properties {
         internal static System.Drawing.Bitmap FillTool_204_32 {
             get {
                 object obj = ResourceManager.GetObject("FillTool_204_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Save_6530 {
+            get {
+                object obj = ResourceManager.GetObject("Save_6530", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

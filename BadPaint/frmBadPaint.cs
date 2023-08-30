@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace BadPaint
 {
     public partial class frmBadPaint : Form
     {
         public Graphics graphics;
+
         public Pen pen1;
         public Pen pen2;
         public Pen currentPen;
@@ -24,12 +27,18 @@ namespace BadPaint
         public List<List<Color>> palettes;
         public List<PictureBox> paletteBoxes;
 
+        public Bitmap imageBuffer;
+
         public frmBadPaint()
         {
             InitializeComponent();
 
+            // Setup image buffer
+            imageBuffer = new Bitmap(pnlCanvas.Width, pnlCanvas.Height);
+
             // Setup graphics
-            graphics = pnlCanvas.CreateGraphics();
+            // graphics = pnlCanvas.CreateGraphics();
+            graphics = Graphics.FromImage(imageBuffer);
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             // Setup pens
@@ -105,6 +114,11 @@ namespace BadPaint
 
                 cursorX = e.X;
                 cursorY = e.Y;
+
+                // Redraw
+                Graphics pnlgfx = pnlCanvas.CreateGraphics();
+                pnlgfx.DrawImage(imageBuffer, 0, 0);
+                pnlgfx.Dispose();
             }
         }
 
@@ -129,6 +143,11 @@ namespace BadPaint
                 // Fill with primary color
                 graphics.FillRectangle(pen1.Brush, Rectangle.FromLTRB(0, 0, pnlCanvas.Width, pnlCanvas.Height));
             }
+
+            // Redraw
+            Graphics pnlgfx = pnlCanvas.CreateGraphics();
+            pnlgfx.DrawImage(imageBuffer, 0, 0);
+            pnlgfx.Dispose();
         }
 
         private void frmBadPaint_Load(object sender, EventArgs e)
@@ -213,6 +232,30 @@ namespace BadPaint
             }
 
             nudPaletteNum.Value = paletteNum;
+        }
+
+        private void boxSave_Click(object sender, EventArgs e)
+        {
+            saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PNG Image|*.png";
+            saveFileDialog.Title = "Save an Image File";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                pnlCanvas.DrawToBitmap(imageBuffer, new Rectangle(0, 0, pnlCanvas.Width, pnlCanvas.Height));
+                imageBuffer.Save(saveFileDialog.FileName, ImageFormat.Png);
+            }
+        }
+
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            
+        }
+
+        private void pnlCanvas_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(imageBuffer, 0, 0);
         }
 
         public void addPalettes()
