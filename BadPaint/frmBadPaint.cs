@@ -93,9 +93,6 @@ namespace BadPaint
 
             cursorX = e.X;
             cursorY = e.Y;
-
-            // Fix stationary click bug
-            pnlCanvas_MouseMove(sender, e);
         }
 
         private void pnlCanvas_MouseUp(object sender, MouseEventArgs e)
@@ -236,15 +233,15 @@ namespace BadPaint
 
         private void boxSave_Click(object sender, EventArgs e)
         {
-            saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PNG Image|*.png";
-            saveFileDialog.Title = "Save an Image File";
-            saveFileDialog.ShowDialog();
+            dlgSave = new SaveFileDialog();
+            dlgSave.Filter = "PNG Image|*.png";
+            dlgSave.Title = "Save an Image File";
+            dlgSave.ShowDialog();
 
-            if (saveFileDialog.FileName != "")
+            if (dlgSave.FileName != "")
             {
                 pnlCanvas.DrawToBitmap(imageBuffer, new Rectangle(0, 0, pnlCanvas.Width, pnlCanvas.Height));
-                imageBuffer.Save(saveFileDialog.FileName, ImageFormat.Png);
+                imageBuffer.Save(dlgSave.FileName, ImageFormat.Png);
             }
         }
 
@@ -256,6 +253,37 @@ namespace BadPaint
         private void pnlCanvas_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(imageBuffer, 0, 0);
+        }
+
+        private void btnChangeCustomColor_Click(object sender, EventArgs e)
+        {
+            dlgCustomPalette.ShowDialog();
+
+            if (dlgCustomPalette.Color != null)
+            {
+                boxPaletteCustom.BackColor = dlgCustomPalette.Color;
+            }
+        }
+
+        private void boxOpen_Click(object sender, EventArgs e)
+        {
+            // Open file and read data to bitmap
+            dlgOpen.ShowDialog();
+
+            if (dlgOpen.FileName != "")
+            {
+                // Load image buffer
+                imageBuffer = new Bitmap(dlgOpen.FileName);
+
+                // Setup graphics again
+                graphics = Graphics.FromImage(imageBuffer);
+                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                // Redraw
+                Graphics pnlgfx = pnlCanvas.CreateGraphics();
+                pnlgfx.DrawImage(imageBuffer, 0, 0);
+                pnlgfx.Dispose();
+            }
         }
 
         public void addPalettes()

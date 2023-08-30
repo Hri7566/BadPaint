@@ -30,8 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBadPaint));
             this.pnlCanvas = new System.Windows.Forms.Panel();
+            this.dlgSave = new System.Windows.Forms.SaveFileDialog();
+            this.dlgCustomPalette = new System.Windows.Forms.ColorDialog();
+            this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.pnlPalette = new System.Windows.Forms.Panel();
+            this.btnChangeCustomColor = new System.Windows.Forms.Button();
+            this.boxPaletteCustom = new System.Windows.Forms.PictureBox();
             this.nudPaletteNum = new System.Windows.Forms.NumericUpDown();
+            this.pnlConfig = new System.Windows.Forms.Panel();
+            this.boxOpen = new System.Windows.Forms.PictureBox();
+            this.boxSave = new System.Windows.Forms.PictureBox();
+            this.lblLineWidth = new System.Windows.Forms.Label();
+            this.boxFill = new System.Windows.Forms.PictureBox();
+            this.nudLineWidth = new System.Windows.Forms.NumericUpDown();
             this.boxPaletteSelected2 = new System.Windows.Forms.PictureBox();
             this.boxPaletteSelected1 = new System.Windows.Forms.PictureBox();
             this.boxPalette16 = new System.Windows.Forms.PictureBox();
@@ -41,11 +52,6 @@
             this.boxPalette12 = new System.Windows.Forms.PictureBox();
             this.boxPalette11 = new System.Windows.Forms.PictureBox();
             this.boxPalette10 = new System.Windows.Forms.PictureBox();
-            this.pnlConfig = new System.Windows.Forms.Panel();
-            this.boxSave = new System.Windows.Forms.PictureBox();
-            this.lblLineWidth = new System.Windows.Forms.Label();
-            this.boxFill = new System.Windows.Forms.PictureBox();
-            this.nudLineWidth = new System.Windows.Forms.NumericUpDown();
             this.boxPalette9 = new System.Windows.Forms.PictureBox();
             this.boxPalette7 = new System.Windows.Forms.PictureBox();
             this.boxPalette6 = new System.Windows.Forms.PictureBox();
@@ -55,10 +61,14 @@
             this.boxPalette3 = new System.Windows.Forms.PictureBox();
             this.boxPalette2 = new System.Windows.Forms.PictureBox();
             this.boxPalette1 = new System.Windows.Forms.PictureBox();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.pnlCanvas.SuspendLayout();
             this.pnlPalette.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.boxPaletteCustom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPaletteNum)).BeginInit();
+            this.pnlConfig.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.boxOpen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxFill)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLineWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPaletteSelected2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPaletteSelected1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette16)).BeginInit();
@@ -68,10 +78,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette10)).BeginInit();
-            this.pnlConfig.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.boxSave)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxFill)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLineWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette6)).BeginInit();
@@ -86,23 +92,33 @@
             // pnlCanvas
             // 
             this.pnlCanvas.BackColor = System.Drawing.Color.White;
-            this.pnlCanvas.Controls.Add(this.pnlPalette);
-            this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCanvas.Location = new System.Drawing.Point(0, 0);
+            this.pnlCanvas.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlCanvas.Location = new System.Drawing.Point(0, 38);
             this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Size = new System.Drawing.Size(956, 642);
+            this.pnlCanvas.Size = new System.Drawing.Size(956, 604);
             this.pnlCanvas.TabIndex = 0;
             this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             this.pnlCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlCanvas_MouseDown);
             this.pnlCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlCanvas_MouseMove);
             this.pnlCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlCanvas_MouseUp);
             // 
+            // dlgSave
+            // 
+            this.dlgSave.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
+            // 
+            // dlgOpen
+            // 
+            this.dlgOpen.FileName = "openFileDialog1";
+            // 
             // pnlPalette
             // 
             this.pnlPalette.BackColor = System.Drawing.SystemColors.Control;
             this.pnlPalette.BackgroundImage = global::BadPaint.Properties.Resources.carpet;
             this.pnlPalette.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPalette.Controls.Add(this.btnChangeCustomColor);
+            this.pnlPalette.Controls.Add(this.boxPaletteCustom);
             this.pnlPalette.Controls.Add(this.nudPaletteNum);
+            this.pnlPalette.Controls.Add(this.pnlConfig);
             this.pnlPalette.Controls.Add(this.boxPaletteSelected2);
             this.pnlPalette.Controls.Add(this.boxPaletteSelected1);
             this.pnlPalette.Controls.Add(this.boxPalette16);
@@ -112,7 +128,6 @@
             this.pnlPalette.Controls.Add(this.boxPalette12);
             this.pnlPalette.Controls.Add(this.boxPalette11);
             this.pnlPalette.Controls.Add(this.boxPalette10);
-            this.pnlPalette.Controls.Add(this.pnlConfig);
             this.pnlPalette.Controls.Add(this.boxPalette9);
             this.pnlPalette.Controls.Add(this.boxPalette7);
             this.pnlPalette.Controls.Add(this.boxPalette6);
@@ -128,6 +143,26 @@
             this.pnlPalette.Size = new System.Drawing.Size(956, 38);
             this.pnlPalette.TabIndex = 0;
             // 
+            // btnChangeCustomColor
+            // 
+            this.btnChangeCustomColor.Location = new System.Drawing.Point(724, 3);
+            this.btnChangeCustomColor.Name = "btnChangeCustomColor";
+            this.btnChangeCustomColor.Size = new System.Drawing.Size(19, 19);
+            this.btnChangeCustomColor.TabIndex = 22;
+            this.btnChangeCustomColor.Text = "!";
+            this.btnChangeCustomColor.UseVisualStyleBackColor = true;
+            this.btnChangeCustomColor.Click += new System.EventHandler(this.btnChangeCustomColor_Click);
+            // 
+            // boxPaletteCustom
+            // 
+            this.boxPaletteCustom.BackColor = System.Drawing.Color.Black;
+            this.boxPaletteCustom.Location = new System.Drawing.Point(711, 3);
+            this.boxPaletteCustom.Name = "boxPaletteCustom";
+            this.boxPaletteCustom.Size = new System.Drawing.Size(32, 32);
+            this.boxPaletteCustom.TabIndex = 21;
+            this.boxPaletteCustom.TabStop = false;
+            this.boxPaletteCustom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.box_palette_MouseDown);
+            // 
             // nudPaletteNum
             // 
             this.nudPaletteNum.Location = new System.Drawing.Point(663, 7);
@@ -140,6 +175,84 @@
             this.nudPaletteNum.Size = new System.Drawing.Size(45, 20);
             this.nudPaletteNum.TabIndex = 20;
             this.nudPaletteNum.ValueChanged += new System.EventHandler(this.nudPaletteNum_ValueChanged);
+            // 
+            // pnlConfig
+            // 
+            this.pnlConfig.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlConfig.Controls.Add(this.boxOpen);
+            this.pnlConfig.Controls.Add(this.boxSave);
+            this.pnlConfig.Controls.Add(this.lblLineWidth);
+            this.pnlConfig.Controls.Add(this.boxFill);
+            this.pnlConfig.Controls.Add(this.nudLineWidth);
+            this.pnlConfig.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlConfig.Location = new System.Drawing.Point(762, 0);
+            this.pnlConfig.Name = "pnlConfig";
+            this.pnlConfig.Size = new System.Drawing.Size(192, 36);
+            this.pnlConfig.TabIndex = 1;
+            // 
+            // boxOpen
+            // 
+            this.boxOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.boxOpen.Image = global::BadPaint.Properties.Resources.Open_6529;
+            this.boxOpen.Location = new System.Drawing.Point(3, 16);
+            this.boxOpen.Name = "boxOpen";
+            this.boxOpen.Size = new System.Drawing.Size(32, 16);
+            this.boxOpen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.boxOpen.TabIndex = 14;
+            this.boxOpen.TabStop = false;
+            this.boxOpen.Click += new System.EventHandler(this.boxOpen_Click);
+            // 
+            // boxSave
+            // 
+            this.boxSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.boxSave.Image = global::BadPaint.Properties.Resources.Save_6530;
+            this.boxSave.Location = new System.Drawing.Point(3, 3);
+            this.boxSave.Name = "boxSave";
+            this.boxSave.Size = new System.Drawing.Size(32, 16);
+            this.boxSave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.boxSave.TabIndex = 13;
+            this.boxSave.TabStop = false;
+            this.boxSave.Click += new System.EventHandler(this.boxSave_Click);
+            // 
+            // lblLineWidth
+            // 
+            this.lblLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLineWidth.AutoSize = true;
+            this.lblLineWidth.Location = new System.Drawing.Point(79, 9);
+            this.lblLineWidth.Name = "lblLineWidth";
+            this.lblLineWidth.Size = new System.Drawing.Size(58, 13);
+            this.lblLineWidth.TabIndex = 11;
+            this.lblLineWidth.Text = "Line Width";
+            // 
+            // boxFill
+            // 
+            this.boxFill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxFill.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.boxFill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.boxFill.Image = ((System.Drawing.Image)(resources.GetObject("boxFill.Image")));
+            this.boxFill.InitialImage = ((System.Drawing.Image)(resources.GetObject("boxFill.InitialImage")));
+            this.boxFill.Location = new System.Drawing.Point(38, 3);
+            this.boxFill.Name = "boxFill";
+            this.boxFill.Size = new System.Drawing.Size(32, 32);
+            this.boxFill.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.boxFill.TabIndex = 12;
+            this.boxFill.TabStop = false;
+            this.boxFill.MouseDown += new System.Windows.Forms.MouseEventHandler(this.boxFill_MouseDown);
+            // 
+            // nudLineWidth
+            // 
+            this.nudLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudLineWidth.Location = new System.Drawing.Point(143, 7);
+            this.nudLineWidth.Name = "nudLineWidth";
+            this.nudLineWidth.Size = new System.Drawing.Size(46, 20);
+            this.nudLineWidth.TabIndex = 1;
+            this.nudLineWidth.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.nudLineWidth.ValueChanged += new System.EventHandler(this.nudLineWidth_ValueChanged);
             // 
             // boxPaletteSelected2
             // 
@@ -228,71 +341,6 @@
             this.boxPalette10.TabIndex = 11;
             this.boxPalette10.TabStop = false;
             this.boxPalette10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.box_palette_MouseDown);
-            // 
-            // pnlConfig
-            // 
-            this.pnlConfig.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlConfig.Controls.Add(this.boxSave);
-            this.pnlConfig.Controls.Add(this.lblLineWidth);
-            this.pnlConfig.Controls.Add(this.boxFill);
-            this.pnlConfig.Controls.Add(this.nudLineWidth);
-            this.pnlConfig.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlConfig.Location = new System.Drawing.Point(762, 0);
-            this.pnlConfig.Name = "pnlConfig";
-            this.pnlConfig.Size = new System.Drawing.Size(192, 36);
-            this.pnlConfig.TabIndex = 1;
-            // 
-            // boxSave
-            // 
-            this.boxSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.boxSave.Image = global::BadPaint.Properties.Resources.Save_6530;
-            this.boxSave.Location = new System.Drawing.Point(3, 3);
-            this.boxSave.Name = "boxSave";
-            this.boxSave.Size = new System.Drawing.Size(32, 32);
-            this.boxSave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.boxSave.TabIndex = 13;
-            this.boxSave.TabStop = false;
-            this.boxSave.Click += new System.EventHandler(this.boxSave_Click);
-            // 
-            // lblLineWidth
-            // 
-            this.lblLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLineWidth.AutoSize = true;
-            this.lblLineWidth.Location = new System.Drawing.Point(79, 9);
-            this.lblLineWidth.Name = "lblLineWidth";
-            this.lblLineWidth.Size = new System.Drawing.Size(58, 13);
-            this.lblLineWidth.TabIndex = 11;
-            this.lblLineWidth.Text = "Line Width";
-            // 
-            // boxFill
-            // 
-            this.boxFill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxFill.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.boxFill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.boxFill.Image = ((System.Drawing.Image)(resources.GetObject("boxFill.Image")));
-            this.boxFill.InitialImage = ((System.Drawing.Image)(resources.GetObject("boxFill.InitialImage")));
-            this.boxFill.Location = new System.Drawing.Point(38, 3);
-            this.boxFill.Name = "boxFill";
-            this.boxFill.Size = new System.Drawing.Size(32, 32);
-            this.boxFill.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.boxFill.TabIndex = 12;
-            this.boxFill.TabStop = false;
-            this.boxFill.MouseDown += new System.Windows.Forms.MouseEventHandler(this.boxFill_MouseDown);
-            // 
-            // nudLineWidth
-            // 
-            this.nudLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudLineWidth.Location = new System.Drawing.Point(143, 7);
-            this.nudLineWidth.Name = "nudLineWidth";
-            this.nudLineWidth.Size = new System.Drawing.Size(46, 20);
-            this.nudLineWidth.TabIndex = 1;
-            this.nudLineWidth.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.nudLineWidth.ValueChanged += new System.EventHandler(this.nudLineWidth_ValueChanged);
             // 
             // boxPalette9
             // 
@@ -384,15 +432,12 @@
             this.boxPalette1.TabStop = false;
             this.boxPalette1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.box_palette_MouseDown);
             // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
-            // 
             // frmBadPaint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 642);
+            this.Controls.Add(this.pnlPalette);
             this.Controls.Add(this.pnlCanvas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -400,9 +445,15 @@
             this.Name = "frmBadPaint";
             this.Text = "Bad Paint";
             this.Load += new System.EventHandler(this.frmBadPaint_Load);
-            this.pnlCanvas.ResumeLayout(false);
             this.pnlPalette.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.boxPaletteCustom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPaletteNum)).EndInit();
+            this.pnlConfig.ResumeLayout(false);
+            this.pnlConfig.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.boxOpen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boxFill)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLineWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPaletteSelected2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPaletteSelected1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette16)).EndInit();
@@ -412,11 +463,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette10)).EndInit();
-            this.pnlConfig.ResumeLayout(false);
-            this.pnlConfig.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.boxSave)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.boxFill)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLineWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.boxPalette6)).EndInit();
@@ -458,7 +504,12 @@
         private System.Windows.Forms.PictureBox boxPaletteSelected2;
         private System.Windows.Forms.NumericUpDown nudPaletteNum;
         private System.Windows.Forms.PictureBox boxSave;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.SaveFileDialog dlgSave;
+        private System.Windows.Forms.PictureBox boxPaletteCustom;
+        private System.Windows.Forms.ColorDialog dlgCustomPalette;
+        private System.Windows.Forms.Button btnChangeCustomColor;
+        private System.Windows.Forms.PictureBox boxOpen;
+        private System.Windows.Forms.OpenFileDialog dlgOpen;
     }
 }
 
