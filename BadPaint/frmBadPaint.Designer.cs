@@ -194,7 +194,7 @@
             // 
             this.boxOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.boxOpen.Image = global::BadPaint.Properties.Resources.Open_6529;
-            this.boxOpen.Location = new System.Drawing.Point(3, 16);
+            this.boxOpen.Location = new System.Drawing.Point(3, 18);
             this.boxOpen.Name = "boxOpen";
             this.boxOpen.Size = new System.Drawing.Size(32, 16);
             this.boxOpen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
