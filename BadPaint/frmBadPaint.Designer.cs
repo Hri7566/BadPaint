@@ -113,7 +113,7 @@
             // pnlPalette
             // 
             this.pnlPalette.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlPalette.BackgroundImage = global::BadPaint.Properties.Resources.carpet;
+            this.pnlPalette.BackgroundImage = global::BadPaint.Properties.Resources.arcade_carpet_1_512;
             this.pnlPalette.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPalette.Controls.Add(this.btnChangeCustomColor);
             this.pnlPalette.Controls.Add(this.boxPaletteCustom);
@@ -179,6 +179,7 @@
             // pnlConfig
             // 
             this.pnlConfig.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlConfig.BackgroundImage = global::BadPaint.Properties.Resources.carpet_2_256;
             this.pnlConfig.Controls.Add(this.boxOpen);
             this.pnlConfig.Controls.Add(this.boxSave);
             this.pnlConfig.Controls.Add(this.lblLineWidth);
@@ -189,6 +190,7 @@
             this.pnlConfig.Name = "pnlConfig";
             this.pnlConfig.Size = new System.Drawing.Size(192, 36);
             this.pnlConfig.TabIndex = 1;
+            this.pnlConfig.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlConfig_Paint);
             // 
             // boxOpen
             // 
@@ -231,7 +233,6 @@
             this.boxFill.BackColor = System.Drawing.SystemColors.ControlLight;
             this.boxFill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.boxFill.Image = ((System.Drawing.Image)(resources.GetObject("boxFill.Image")));
-            this.boxFill.InitialImage = ((System.Drawing.Image)(resources.GetObject("boxFill.InitialImage")));
             this.boxFill.Location = new System.Drawing.Point(38, 3);
             this.boxFill.Name = "boxFill";
             this.boxFill.Size = new System.Drawing.Size(32, 32);
@@ -248,7 +249,7 @@
             this.nudLineWidth.Size = new System.Drawing.Size(46, 20);
             this.nudLineWidth.TabIndex = 1;
             this.nudLineWidth.Value = new decimal(new int[] {
-            7,
+            5,
             0,
             0,
             0});

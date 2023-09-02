@@ -63,6 +63,16 @@ namespace BadPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arcade_carpet_1_512 {
+            get {
+                object obj = ResourceManager.GetObject("arcade_carpet_1_512", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap carpet {
             get {
                 object obj = ResourceManager.GetObject("carpet", resourceCulture);
@@ -73,9 +83,9 @@ namespace BadPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Fill {
+        internal static System.Drawing.Bitmap carpet_2_256 {
             get {
-                object obj = ResourceManager.GetObject("Fill", resourceCulture);
+                object obj = ResourceManager.GetObject("carpet_2_256", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +93,9 @@ namespace BadPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FillTool_204_32 {
+        internal static System.Drawing.Bitmap Fill {
             get {
-                object obj = ResourceManager.GetObject("FillTool_204_32", resourceCulture);
+                object obj = ResourceManager.GetObject("Fill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

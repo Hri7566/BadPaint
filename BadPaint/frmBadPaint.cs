@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
 
 namespace BadPaint
 {
@@ -21,8 +16,8 @@ namespace BadPaint
         public Pen currentPen;
         
         public int cursorX, cursorY = -1;
-        public bool mouseHeld = false;
-        public int lineWidth = 7;
+        public bool drawing = false;
+        public int lineWidth = 5;
 
         public List<List<Color>> palettes;
         public List<PictureBox> paletteBoxes;
@@ -32,6 +27,9 @@ namespace BadPaint
         public frmBadPaint()
         {
             InitializeComponent();
+
+            // Set line width component value
+            nudLineWidth.Value = lineWidth;
 
             // Setup image buffer
             imageBuffer = new Bitmap(pnlCanvas.Width, pnlCanvas.Height);
@@ -74,11 +72,19 @@ namespace BadPaint
             // Setup palettes
             palettes = new List<List<Color>>();
             addPalettes();
+
+            // Count colors (debug)
+            int count = 0;
+            foreach (List<Color> pal in palettes)
+            {
+                count += pal.Count;
+            }
+            Console.WriteLine(count);
         }
 
         private void pnlCanvas_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseHeld = true;
+            drawing = true;
 
             if (e.Button == MouseButtons.Right)
             {
@@ -97,14 +103,14 @@ namespace BadPaint
 
         private void pnlCanvas_MouseUp(object sender, MouseEventArgs e)
         {
-            mouseHeld = false;
-            cursorX = -1;
-            cursorY = -1;
+            drawing = false;
+            cursorX = 0;
+            cursorY = 0;
         }
 
         private void pnlCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (cursorX != -1 && cursorY != -1 && mouseHeld)
+            if (cursorX != 0 && cursorY != 0 && drawing)
             {
                 // Draw line
                 graphics.DrawLine(currentPen, new Point(cursorX, cursorY), e.Location);
@@ -286,8 +292,17 @@ namespace BadPaint
             }
         }
 
+        private void pnlConfig_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         public void addPalettes()
         {
+            // Generate palette information
+            // Web color list from Wikipedia
+            // https://en.wikipedia.org/wiki/Web_colors
+
             // HTML
             palettes.Add(new List<Color> { Color.White, Color.Silver, Color.Gray, Color.Black, Color.Red, Color.Maroon, Color.Yellow, Color.Olive, Color.Lime, Color.Green, Color.Aqua, Color.Teal, Color.Blue, Color.Navy, Color.Fuchsia, Color.Purple });
 

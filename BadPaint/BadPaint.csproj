@@ -82,13 +82,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\dirt01.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\carpet.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\FillTool_204_32.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Fill.png" />
@@ -101,6 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Open_6529.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arcade_carpet_1_512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carpet_2_256.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
