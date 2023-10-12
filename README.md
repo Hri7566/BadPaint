@@ -1,5 +1,5 @@
 # BadPaint
-#### Video Demo: https://www.youtube.com/watch?v=gFGA0INf0iU
+#### Video Demo: [redacted, contact to see]
 #### Description:
 BadPaint is a basic paint program written in C# with .NET as a Windows Forms application. It's designed to work with Windows 10 and up.
 
